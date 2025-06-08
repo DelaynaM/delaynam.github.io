@@ -4,17 +4,19 @@
         <meta charset="UTF-8" />
         <title>404 Error Page</title>
     <style>
+   
     #container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
         width: 100%;
-        height: 100vh; /* Full viewport height */
-        position: relative;
-        }
+        height: 100vh;
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
 
     #centered-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         text-align: center;
         z-index: 10;
     }
@@ -23,7 +25,6 @@
         font-size: 6em;
         margin: 0;
         }   
-
     #message {
         color: black;
         font-size: 2em;
@@ -34,6 +35,27 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 
+    .home-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 16px;
+        background-color: paleturquoise;
+        color: black;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .home-link:hover {
+        background-color: #ffffff;
+    }   
+    
+    body.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+    }
+    
     .topnav {
         display: inline-block;
         border-radius: 10px;
@@ -85,21 +107,31 @@
     </div> 
         
         <div id="container">
+        <img id="error-img" src="Images/sadmonster.webp" alt="sad purple monster" height="600px" width="500px" style="border-radius: 382px;">
+    
             <div id="centered-content">
-                <div id= "fouroh4">
-                404
-                </div>
-            
+                <div id="fouroh4">404</div>
                 <div id="message">
-                    <p> Ohhhhhr Noooooor</p> 
-                    <b> </b> 
-                    <p> This page is not Real!</p>
+                    <p>Oooor noooor, you have encountered a page that doesn't quite exist yet</p>
+                    <a href="index.html" id="home-link" class="home-link">Take me home</a>
                 </div>
             </div>
         
+        
         </div>
         
-          </body>  
+    <script>
+    document.getElementById("home-link").addEventListener("click", function (event) {
+        event.preventDefault(); 
+        document.body.classList.add("fade-out");
+            setTimeout(function () {
+                window.location.href = "index.html"; 
+            }, 1000); 
+    });
+        
+    </script>
+        
+    </body>  
         
 
 </html>

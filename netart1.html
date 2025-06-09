@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Glitch Poem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: black;
+      color: white;
+      font-family: 'Georgia', serif;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      overflow: hidden;
+    }
+
+    .poem {
+      transition: opacity 1s ease;
+      white-space: pre-wrap;
+      max-width: 800px;
+    }
+
+    .glow {
+      text-shadow: 0 0 10px #ffffffaa, 0 0 25px #ffffff88;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 1000;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+
+    @keyframes flicker {
+      0%   { opacity: 1; }
+      20%  { opacity: 0.4; }
+      40%  { opacity: 0.7; }
+      60%  { opacity: 0.2; }
+      80%  { opacity: 0.9; }
+      100% { opacity: 0; }
+    }
+
+    .flicker-out {
+      animation: flicker 2s forwards;
+    }
+
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background: transparent;
+      opacity: 0;
+      transition: opacity 3s ease-in;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    #constellation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    #nextButton {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      font-size: 1em;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+      opacity: 0;
+    }
+
+    #nextButton:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+<div class="poem" id="fullPoem">
+I found a light in the middle of nowhere,  
+soft as a whisper, warm as a sigh.  
+It blinked like it had something to say,  
+then faded before I could ask.  
+  
+The ground was quiet but full of stories,  
+cracks that held forgotten names.  
+I walked between the shadows,  
+hoping one might call me home.
+</div>
+
+<div class="poem hidden glow" id="firstStanza">
+I found a light in the middle of nowhere,  
+soft as a whisper, warm as a sigh.  
+It blinked like it had something to say,  
+then faded before I could ask.
+</div>
+
+<div id="overlay"></div>
+<div id="stars"></div>
+<canvas id="constellation"></canvas>
+
+<a href="netart.html" id="nextButton">Page 1</a>
+
+<script>
+  setTimeout(() => {
+    document.getElementById('overlay').classList.add('flicker-out');
+    document.getElementById('fullPoem').classList.add('hidden');
+
+    setTimeout(() => {
+      document.getElementById('overlay').style.opacity = '1';
+    }, 2000);
+
+    setTimeout(() => {
+      document.getElementById('overlay').style.opacity = '0';
+      const stanza = document.getElementById('firstStanza');
+      stanza.classList.remove('hidden');
+      stanza.classList.add('visible');
+    }, 3500);
+
+    setTimeout(() => {
+      const stanza = document.getElementById('firstStanza');
+      stanza.classList.remove('visible');
+      stanza.classList.add('hidden');
+    }, 11000);
+
+    setTimeout(() => {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        starsContainer.appendChild(star);
+      }
+      starsContainer.style.opacity = '1';
+    }, 12000);
+
+    setTimeout(() => {
+      const canvas = document.getElementById('constellation');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const points = [
+        { x: 100, y: 200 },
+        { x: 200, y: 300 },
+        { x: 300, y: 250 },
+        { x: 400, y: 180 },
+        { x: 500, y: 260 }
+      ];
+
+      canvas.style.opacity = '1';
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 1;
+
+      let i = 0;
+
+      function drawNextLine() {
+        if (i < points.length - 1) {
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[i + 1].x, points[i + 1].y);
+          ctx.stroke();
+          i++;
+          setTimeout(drawNextLine, 500);
+        }
+      }
+
+      drawNextLine();
+    }, 13000);
+
+    setTimeout(() => {
+      document.getElementById('nextButton').style.opacity = '1';
+    }, 16000);
+  }, 3000);
+</script>
+
+</body>
+</html>
+
+

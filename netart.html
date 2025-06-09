@@ -39,6 +39,47 @@
         background-color: #525e61;
         color: white;
     }   
+        
+        
+    #container {
+        position: relative;
+        width: 1600px;
+        min-height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .random-img {
+        position: absolute;
+        width: 297px; /* or whatever */
+        height: auto;
+        z-index: 3;
+    }
+
+        
+    #bottom-right-img {
+        position: absolute;
+        bottom: 20px;
+        right: 36px;
+        width: 593px; 
+        height: auto;
+        z-index: 5;
+    }
+
+    #center-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 645px; 
+        height: auto;
+        z-index: 5;
+}
+
+
+
+   
+
     </style>
     </head>
     
@@ -54,6 +95,39 @@
         </div>
     </div>
         
+    <div id="container">
+        
+    </div>
+
+        
+    <script>
+        function createRandomImage(src) {
+            const img = document.createElement("img");
+            img.src = src;
+            img.className = "random-img";
+
+            // Random position within container size
+            const container = document.getElementById("container");
+            const maxX = container.offsetWidth - 150; //
+            const maxY = container.offsetHeight - 150; 
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            img.style.left = `${randomX}px`;
+            img.style.top = `${randomY}px`;
+
+            container.appendChild(img);
+        }
+
+        createRandomImage("Images/lightbulb.png");
+        createRandomImage("Images/street.png");
+        createRandomImage("Images/nowhere.jpg");
+        createRandomImage("Images/rainbow.jpg");
+        createRandomImage("Images/hills.png");
+    </script>
+
+            
           </body>  
         
 

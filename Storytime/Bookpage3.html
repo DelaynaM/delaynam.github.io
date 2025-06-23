@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Lost Manuscript – Page 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background-color: #1c1c1c;
+      font-family: 'Merriweather', serif;
+    }
+
+    .flashlight {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, transparent 80px, rgba(0,0,0,0.95) 200px);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .book-container {
+      position: relative;
+      width: 900px;
+      height: 550px;
+      background: linear-gradient(to right, #f5f0e1 49.5%, #e6dbc7 50.5%);
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.15);
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 3rem;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .book-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 49.8%;
+      width: 1px;
+      height: 100%;
+      background-color: #ccc;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      color: #2e1d0f;
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .note {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.4rem;
+      white-space: nowrap;
+      border-right: 2px solid;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink 0.6s step-end infinite;
+      color: #2b2b2b;
+      z-index: 3;
+      position: relative;
+    }
+
+    .scribble {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1rem;
+      color: darkred;
+      opacity: 0.7;
+      transform: rotate(-12deg);
+      z-index: 3;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 22ch }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .continue-btn {
+      margin-top: 3rem;
+      padding: 0.75rem 1.5rem;
+      background-color: goldenrod;
+      color: #fff;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      z-index: 3;
+      position: relative;
+    }
+
+    .continue-btn:hover {
+      background-color: #b8860b;
+    }
+  </style>
+</head>
+<body>
+  <div class="flashlight" id="flashlight"></div>
+
+  <div class="book-container">
+    <h2>The Note</h2>
+    <div class="note">They are erasing pages.</div>
+    <div class="scribble">bellamy street</div>
+    <button class="continue-btn" onclick="location.href='Bookpage4.html'">Continue →</button>
+  </div>
+
+  <script>
+    const flashlight = document.getElementById('flashlight');
+    document.addEventListener('mousemove', e => {
+      flashlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, transparent 80px, rgba(0,0,0,0.95) 200px)`;
+    });
+  </script>
+</body>
+</html>
+
+

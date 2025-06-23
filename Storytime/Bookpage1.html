@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Lost Manuscript – Page 1</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+    body.loaded {
+      opacity: 1;
+    }
+    #background {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    .clickable-book {
+      position: absolute;
+      top: 37%;
+      left: 40%;
+      width: 3%;
+      height: 4%;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .clickable-book:hover {
+      outline: 2px solid goldenrod;
+      box-shadow: 0 0 15px gold;
+    }
+  </style>
+</head>
+<body>
+  <img id="background" src="story_images/creepy%20bookstore.jpg" alt="Old bookstore interior" />
+
+  <!-- Clickable book hotspot -->
+  <a href="Bookpage2.html" class="clickable-book" aria-label="Open the mysterious book"></a>
+
+  <script>
+    window.onload = () => document.body.classList.add('loaded');
+  </script>
+</body>
+</html>
+
+
